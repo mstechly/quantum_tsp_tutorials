@@ -11,7 +11,7 @@ from . import utilities
 
 
 class ForestTSPSolverNaive(object):
-    def __init__(self, distance_matrix, steps=1, ftol=1.0e-2, xtol=1.0e-2, constraints=False):
+    def __init__(self, distance_matrix, steps=1, ftol=1.0e-2, xtol=1.0e-2, use_constraints=False):
 
         self.distance_matrix = distance_matrix
         self.number_of_nodes = len(self.distance_matrix)
@@ -27,7 +27,7 @@ class ForestTSPSolverNaive(object):
         self.distribution = None
         self.most_frequent_string = None
         self.sampling_results = None
-        self.constraints = constraints
+        self.use_constraints = use_constraints
 
 
         cost_operators = self.create_cost_operators()
@@ -84,7 +84,7 @@ class ForestTSPSolverNaive(object):
     def create_cost_operators(self):
         cost_operators = []
         cost_operators += self.create_weights_cost_operators()
-        if self.constraints:
+        if self.use_constraints:
             cost_operators += self.create_penalty_operators_for_bilocation()
             cost_operators += self.create_penalty_operators_for_repetition()
 
