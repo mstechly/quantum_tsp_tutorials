@@ -78,7 +78,11 @@ class ForestTSPSolverNaive(object):
         distribution = {}
         for sol in all_solutions:
             points_order_solution = utilities.binary_state_to_points_order(sol)
-            distribution[tuple(points_order_solution)] = sampling_results[sol]
+            if tuple(points_order_solution) in distribution.keys():
+                distribution[tuple(points_order_solution)] += sampling_results[sol]
+            else:
+                distribution[tuple(points_order_solution)] = sampling_results[sol]
+
         self.distribution = distribution
 
     def create_cost_operators(self):
@@ -110,17 +114,17 @@ class ForestTSPSolverNaive(object):
 
     def create_penalty_operators_for_qubit_range(self, range_of_qubits):
         cost_operators = []
-        weight = -10 * np.max(self.distance_matrix)
+        weight = -100 * np.max(self.distance_matrix)
         for i in range_of_qubits:
             if i == range_of_qubits[0]:
                 z_term = PauliTerm("Z", i, weight)
-                # all_ones_term = PauliTerm("I", 0, 0.5 * weight) - PauliTerm("Z", i, 0.5 * weight)
+                all_ones_term = PauliTerm("I", 0, 0.5 * weight) - PauliTerm("Z", i, 0.5 * weight)
             else:
                 z_term = z_term * PauliTerm("Z", i)
-                # all_ones_term = all_ones_term * (PauliTerm("I", 0, 0.5) - PauliTerm("Z", i, 0.5))
+                all_ones_term = all_ones_term * (PauliTerm("I", 0, 0.5) - PauliTerm("Z", i, 0.5))
 
         z_term = PauliSum([z_term])
-        cost_operators.append(PauliTerm("I", 0, weight) - z_term)# - 2 * all_ones_term)
+        cost_operators.append(PauliTerm("I", 0, weight) - z_term - all_ones_term)
 
         return cost_operators
 

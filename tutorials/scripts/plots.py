@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from .utilities import calculate_cost, get_distance_matrix
+import numpy as np
 
 def plot_cities(cities):
     plt.scatter(cities[:, 0], cities[:, 1], s=200)
@@ -23,3 +24,9 @@ def plot_solution(cities, solution):
     title_string += "\n" + str(solution)
     plt.title(title_string)
 
+def plot_state_histogram(states_with_probs):
+    states = np.array(states_with_probs)[:,0]
+    probs = np.array(states_with_probs)[:,1].astype(float)
+    n = len(states_with_probs)
+    plt.barh(range(n), probs, tick_label=states)
+    plt.show()
