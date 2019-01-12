@@ -10,10 +10,12 @@ import scipy.optimize
 from . import utilities
 
 
-class ForestTSPSolverNaive(object):
+class ForestTSPSolverImproved(object):
     def __init__(self, distance_matrix, steps=1, ftol=1.0e-2, xtol=1.0e-2, use_constraints=False):
 
-        self.distance_matrix = distance_matrix
+        self.costs_to_first_city = distance_matrix[:0]
+        distance_matrix = np.delete(distance_matrix, 0, 0)
+        self.distance_matrix = np.delete(distance_matrix, 0, 1)
         self.qvm = api.QVMConnection()
         self.steps = steps
         self.ftol = ftol
@@ -27,7 +29,6 @@ class ForestTSPSolverNaive(object):
         self.most_frequent_string = None
         self.sampling_results = None
         self.use_constraints = use_constraints
-
 
         cost_operators = self.create_cost_operators()
         driver_operators = self.create_driver_operators()
@@ -71,12 +72,12 @@ class ForestTSPSolverNaive(object):
         most_frequent_string, sampling_results = self.qaoa_inst.get_string(self.betas, self.gammas, samples=10000)
         self.most_frequent_string = most_frequent_string
         self.sampling_results = sampling_results
-        self.solution = utilities.binary_state_to_points_order(most_frequent_string)
+        self.solution = utilities.binary_state_to_points_order_with_fixed_start(most_frequent_string)
         
         all_solutions = sampling_results.keys()
         naive_distribution = {}
         for sol in all_solutions:
-            points_order_solution = utilities.binary_state_to_points_order(sol)
+            points_order_solution = utilities.binary_state_to_points_order_with_fixed_start(sol)
             if tuple(points_order_solution) in naive_distribution.keys():
                 naive_distribution[tuple(points_order_solution)] += sampling_results[sol]
             else:
@@ -139,6 +140,11 @@ class ForestTSPSolverNaive(object):
                         qubit_1 = t * number_of_nodes + i
                         qubit_2 = (t + 1) * number_of_nodes + j
                         cost_operators.append(PauliTerm("I", 0, weight) - PauliTerm("Z", qubit_1, weight) * PauliTerm("Z", qubit_2))
+
+        for city in range(len(self.costs_to_first_city)):
+            distance_from_0 = -self.costs_to_first_city[city]
+            qubit = city
+            cost_operators.append(PauliTerm("Z", qubit, distance_from_0))
 
         return cost_operators
 
