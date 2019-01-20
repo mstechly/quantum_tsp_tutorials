@@ -24,13 +24,15 @@ I don't want to say that it is super advanced and hard - as stated earlier, you 
 
 ## Dependencies
 
-In this tutorial I used pyquil 2.2.1 and grove 1.7.0 . API of the functions may change in next versions, so keep it in mind if something doesn't work for you!
+In this tutorial I used pyquil 2.2.1 and grove 1.7.0 . API of these librares may change in next versions - let me know if something is broken so I can fix it :)
 
 ## About the author
 
 My name is Michał and I work do research on quantum algorithms at Bohr Technology. I focus on applying near-term devices for solving optimization problems and enchance machine learning (so called QML).
 
-You can read my story in [this article on Medium](https://medium.com/@michal.stechly/how-i-got-a-job-in-quantum-computing-7049b81caf91). I also have a blog called [Musty Thoughts](www.mustythoughts.com).
+You can read my story in [this article on Medium](https://medium.com/@michal.stechly/how-i-got-a-job-in-quantum-computing-7049b81caf91). I also have a blog called [Musty thoughts](http://www.mustythoughts.com).
+
+If you want to contact me - feel free to do so: michal.stechy@gmail.com .
 
 ## Unitary Fund
 
