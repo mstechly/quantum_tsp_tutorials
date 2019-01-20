@@ -36,7 +36,7 @@ If you want to contact me - feel free to do so: michal.stechy@gmail.com .
 
 ## Unitary Fund
 
-This project is supported by Unitary Fund.
+This project is supported by [Unitary Fund](http://unitary.fund). If you have an idea for an open-source project for near term hybrid quantum-classical programming, this is a good place for you!
 
 [![Unitary Fund](https://img.shields.io/badge/Supported%20By-UNITARY%20FUND-brightgreen.svg?style=for-the-badge)](http://unitary.fund)
 
