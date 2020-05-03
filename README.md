@@ -28,9 +28,8 @@ In this tutorial I used pyquil 2.2.1 and grove 1.7.0 . API of these librares may
 
 ## About the author
 
-My name is Michał and I do research on quantum algorithms at Bohr Technology. I focus on applying near-term devices for solving optimization problems and enchance machine learning (so called QML).
-
-You can read my story in [this article on Medium](https://medium.com/@michal.stechly/how-i-got-a-job-in-quantum-computing-7049b81caf91). I also have a blog called [Musty thoughts](http://www.mustythoughts.com).
+My name is Michał and I work as Quantum Software Engineer at [Zapata Computing](www.zapatacomputing.com). 
+You can find more materials onmy blog [Musty thoughts](http://www.mustythoughts.com).
 
 If you want to contact me - feel free to do so: michal.stechy@gmail.com .
 
